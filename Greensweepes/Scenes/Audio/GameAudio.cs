@@ -13,8 +13,8 @@ public partial class GameAudio : Node
     [Export] private RandomStreamPlayer markPlayer;
     [Export] private RandomStreamPlayer regrowPlayer;
 
-    private float minAtmoVolume = -24f;
-    private float maxAtmoVolume = -4f;
+    private float minAtmoVolume = -20f;
+    private float maxAtmoVolume = -5f;
 
     public enum Sound
     {

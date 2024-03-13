@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/AtmoLively.ogg-32ba7ace3c97e22fd1fea773d0c731
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0

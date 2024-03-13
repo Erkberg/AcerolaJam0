@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://bn1mtqo1m2ddn"]
+[gd_scene load_steps=14 format=3 uid="uid://bn1mtqo1m2ddn"]
 
 [ext_resource type="Script" path="res://Scenes/Game.cs" id="1_o262b"]
 [ext_resource type="Script" path="res://Scenes/UI/GameUI.cs" id="2_d8mkr"]
 [ext_resource type="PackedScene" uid="uid://bsov3ca7ywudu" path="res://Scenes/UI/IngameUi.tscn" id="2_wo5kr"]
 [ext_resource type="PackedScene" uid="uid://baa0or5n71rme" path="res://Scenes/UI/Menu.tscn" id="3_qwacd"]
 [ext_resource type="Script" path="res://Scenes/Audio/GameAudio.cs" id="5_njei0"]
+[ext_resource type="AudioStream" uid="uid://cru2ypoecok21" path="res://Assets/Audio/Music/Music.ogg" id="6_653dt"]
 [ext_resource type="AudioStream" uid="uid://bcqysc24n5pw6" path="res://Assets/Audio/Atmo/AtmoBleak.ogg" id="6_gjlkd"]
 [ext_resource type="AudioStream" uid="uid://b5w6of5unbqlc" path="res://Assets/Audio/Atmo/AtmoLively.ogg" id="7_4vcnr"]
 [ext_resource type="PackedScene" uid="uid://ch8ib2lp8vskt" path="res://Scenes/Audio/RandomStreamPlayer.tscn" id="8_xn0hx"]
@@ -40,6 +41,7 @@ markPlayer = NodePath("Sounds/MarkPlayer")
 regrowPlayer = NodePath("Sounds/RegrowPlayer")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="GameAudio"]
+stream = ExtResource("6_653dt")
 autoplay = true
 
 [node name="AtmoPlayerBleak" type="AudioStreamPlayer" parent="GameAudio"]

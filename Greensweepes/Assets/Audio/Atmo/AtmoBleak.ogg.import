@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/AtmoBleak.ogg-9166bf61e74f8d06d5b683f48ba42c3
 
 [params]
 
-loop=false
+loop=true
 loop_offset=0
 bpm=0
 beat_count=0
