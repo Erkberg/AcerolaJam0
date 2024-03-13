@@ -1,0 +1,114 @@
+[gd_scene load_steps=16 format=3 uid="uid://deog8ii522kam"]
+
+[ext_resource type="Script" path="res://Scenes/World/Cell.cs" id="1_krkwj"]
+[ext_resource type="PackedScene" uid="uid://clgk76betcsat" path="res://Scenes/Effects/EnergyParticle.tscn" id="2_etk52"]
+[ext_resource type="Material" uid="uid://cx3p5s71mmc53" path="res://Assets/Materials/BlackMat.tres" id="2_nnpdp"]
+[ext_resource type="Material" uid="uid://duwoo2gr0cogi" path="res://Assets/Materials/GrayMat.tres" id="3_3mggo"]
+[ext_resource type="Material" uid="uid://waeth6md7uaw" path="res://Assets/Materials/GreenMat.tres" id="4_n8cmc"]
+[ext_resource type="Material" uid="uid://dxbnpvakx6gip" path="res://Assets/Materials/BlueMat.tres" id="5_ei6n4"]
+[ext_resource type="Material" uid="uid://b4u3gjwtr83qx" path="res://Assets/Materials/RedMat.tres" id="6_uop6d"]
+[ext_resource type="Texture2D" uid="uid://du1di23s3qcj5" path="res://Assets/Textures/Outline1px.png" id="7_tviq2"]
+[ext_resource type="Texture2D" uid="uid://bdauorhb7m2xk" path="res://Assets/Textures/Highlight.png" id="8_8r7ip"]
+[ext_resource type="PackedScene" uid="uid://b334b5gfk6cod" path="res://Scenes/World/Trees.tscn" id="8_qfbtx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uvbl5"]
+size = Vector3(1, 0.1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2xoth"]
+size = Vector3(1, 0.1, 1)
+
+[sub_resource type="Animation" id="Animation_cq2v0"]
+resource_name = "Highlight"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HighlightSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.815686, 0.854902, 0.568627, 0), Color(0.815686, 0.854902, 0.568627, 0.25098), Color(0.815686, 0.854902, 0.568627, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vf28o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HighlightSprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qjnys"]
+_data = {
+"Highlight": SubResource("Animation_cq2v0"),
+"RESET": SubResource("Animation_vf28o")
+}
+
+[node name="Cell" type="Area3D" node_paths=PackedStringArray("numberText", "groundMesh", "trees", "animPlayer", "energyTimer", "regrowSprite", "neighbors")]
+script = ExtResource("1_krkwj")
+numberText = NodePath("Label3D")
+groundMesh = NodePath("Ground")
+trees = NodePath("Trees")
+animPlayer = NodePath("AnimationPlayer")
+energyTimer = NodePath("EnergyTimer")
+energyParticleScene = ExtResource("2_etk52")
+regrowSprite = NodePath("RegrowSprite")
+neighbors = []
+hiddenMat = ExtResource("2_nnpdp")
+highlightedMat = ExtResource("3_3mggo")
+forestMat = ExtResource("4_n8cmc")
+markedMat = ExtResource("5_ei6n4")
+cutMat = ExtResource("6_uop6d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_uvbl5")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_nnpdp")
+mesh = SubResource("BoxMesh_2xoth")
+skeleton = NodePath("")
+
+[node name="Label3D" type="Label3D" parent="."]
+layers = 2
+billboard = 1
+modulate = Color(0.921569, 0.929412, 0.913725, 1)
+outline_modulate = Color(0.0352941, 0.0392157, 0.0784314, 1)
+font_size = 92
+outline_size = 24
+
+[node name="BorderSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.39, 0, 0, 0, -1.70474e-08, 0.39, 0, -0.39, -1.70474e-08, 0, 0.055, 0)
+modulate = Color(1, 1, 1, 0.0313726)
+texture = ExtResource("7_tviq2")
+
+[node name="HighlightSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.39, 0, 0, 0, -1.70474e-08, 0.39, 0, -0.39, -1.70474e-08, 0, 0.055, 0)
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("8_8r7ip")
+
+[node name="RegrowSprite" type="Sprite3D" parent="."]
+transform = Transform3D(0.39, 0, 0, 0, -1.70474e-08, 0.39, 0, -0.39, -1.70474e-08, 0, 0.055, 0)
+visible = false
+modulate = Color(0.145098, 0.337255, 0.180392, 1)
+texture = ExtResource("8_8r7ip")
+
+[node name="Trees" parent="." instance=ExtResource("8_qfbtx")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qjnys")
+}
+
+[node name="EnergyTimer" type="Timer" parent="."]
+wait_time = 2.0

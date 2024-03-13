@@ -1,0 +1,107 @@
+[gd_scene load_steps=3 format=3 uid="uid://baa0or5n71rme"]
+
+[ext_resource type="Script" path="res://Scenes/UI/Menu.cs" id="1_qod3u"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_rmk46"]
+
+[node name="Menu" type="Control" node_paths=PackedStringArray("showNumbersCheckbox", "playButton")]
+process_mode = 3
+visibility_layer = 2
+z_index = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_qod3u")
+showNumbersCheckbox = NodePath("MarginContainer/HBoxContainer/ShowNumbersCheckbox")
+playButton = NodePath("MarginContainer/HBoxContainer/PlayButton")
+
+[node name="Background" type="TextureRect" parent="."]
+modulate = Color(0.0352941, 0.0392157, 0.0784314, 0.501961)
+visibility_layer = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("CanvasTexture_rmk46")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+visibility_layer = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+visibility_layer = 2
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+visibility_layer = 2
+layout_mode = 2
+theme_override_colors/font_color = Color(0.921569, 0.929412, 0.913725, 1)
+theme_override_colors/font_outline_color = Color(0.0352941, 0.0392157, 0.0784314, 1)
+theme_override_font_sizes/font_size = 100
+text = "Greensweepes"
+horizontal_alignment = 1
+
+[node name="SubTitleLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+visibility_layer = 2
+layout_mode = 2
+theme_override_colors/font_color = Color(0.921569, 0.929412, 0.913725, 1)
+theme_override_colors/font_outline_color = Color(0.0352941, 0.0392157, 0.0784314, 1)
+theme_override_font_sizes/font_size = 30
+text = "A game by Erkberg
+Created for Acerola Jam 0 (Theme: Aberration)"
+horizontal_alignment = 1
+
+[node name="PlayButton" type="Button" parent="MarginContainer/HBoxContainer"]
+visibility_layer = 2
+custom_minimum_size = Vector2(320, 80)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.921569, 0.929412, 0.913725, 1)
+theme_override_colors/font_outline_color = Color(0.0352941, 0.0392157, 0.0784314, 1)
+theme_override_font_sizes/font_size = 64
+text = "Play"
+
+[node name="TutorialHeaderLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+visibility_layer = 2
+layout_mode = 2
+theme_override_colors/font_color = Color(0.921569, 0.929412, 0.913725, 1)
+theme_override_colors/font_outline_color = Color(0.0352941, 0.0392157, 0.0784314, 1)
+theme_override_font_sizes/font_size = 30
+text = "How to play"
+horizontal_alignment = 1
+
+[node name="TutorialLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+visibility_layer = 2
+layout_mode = 2
+theme_override_colors/font_color = Color(0.921569, 0.929412, 0.913725, 1)
+theme_override_colors/font_outline_color = Color(0.0352941, 0.0392157, 0.0784314, 1)
+theme_override_font_sizes/font_size = 20
+text = "Click cells to reveal them (start with the blinking one to be safe)
+Numbers / Stumps show how many neighbors are cut down and shouldn't be clicked
+Mark those baddies with right click
+So far, so Minesweeper, but:
+Trees accumulate energy over time
+That energy can be used to regrow marked or cut down cells
+You can also scroll by pointing at screen borders, zoom via mouse wheel and open this screen with Esc"
+horizontal_alignment = 1
+
+[node name="ShowNumbersCheckbox" type="CheckBox" parent="MarginContainer/HBoxContainer"]
+visibility_layer = 2
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.921569, 0.929412, 0.913725, 1)
+theme_override_colors/font_outline_color = Color(0.0352941, 0.0392157, 0.0784314, 1)
+button_pressed = true
+text = "Show numbers (off = more immersion but harder)"

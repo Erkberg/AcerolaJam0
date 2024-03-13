@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://clgk76betcsat"]
+
+[ext_resource type="Material" uid="uid://cewasmgq4n7ci" path="res://Assets/Materials/EmissiveGreenMat.tres" id="1_y7hja"]
+
+[sub_resource type="Curve" id="Curve_2apd6"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.176245, 0.968998), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wi7cr"]
+curve = SubResource("Curve_2apd6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wfph2"]
+gravity = Vector3(0, 3, 0)
+scale_curve = SubResource("CurveTexture_wi7cr")
+
+[sub_resource type="SphereMesh" id="SphereMesh_sx6m6"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="Animation" id="Animation_8fw5f"]
+resource_name = "Emit"
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8amtf"]
+_data = {
+"Emit": SubResource("Animation_8fw5f")
+}
+
+[node name="EnergyParticle" type="GPUParticles3D"]
+material_override = ExtResource("1_y7hja")
+amount = 1
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_wfph2")
+draw_pass_1 = SubResource("SphereMesh_sx6m6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_8amtf")
+}
+autoplay = "Emit"

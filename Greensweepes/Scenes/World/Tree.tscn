@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjy7bgtgoa80p"]
+
+[ext_resource type="Script" path="res://Scenes/World/Tree.cs" id="1_sithq"]
+[ext_resource type="Material" uid="uid://b33hf3nx260c" path="res://Assets/Materials/BrownMat.tres" id="2_w4qpn"]
+[ext_resource type="Material" uid="uid://waeth6md7uaw" path="res://Assets/Materials/GreenMat.tres" id="3_3clqx"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_f4ru4"]
+top_radius = 0.05
+bottom_radius = 0.05
+height = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_j74ay"]
+top_radius = 0.0
+bottom_radius = 0.133
+height = 0.25
+
+[node name="Tree" type="Node3D" node_paths=PackedStringArray("stump", "crown")]
+script = ExtResource("1_sithq")
+stump = NodePath("Stump")
+crown = NodePath("Crown")
+
+[node name="Stump" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stump"]
+material_override = ExtResource("2_w4qpn")
+mesh = SubResource("CylinderMesh_f4ru4")
+
+[node name="Crown" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Crown"]
+material_override = ExtResource("3_3clqx")
+mesh = SubResource("CylinderMesh_j74ay")

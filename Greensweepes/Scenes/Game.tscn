@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bn1mtqo1m2ddn"]
+
+[ext_resource type="Script" path="res://Scenes/Game.cs" id="1_o262b"]
+[ext_resource type="PackedScene" uid="uid://bsov3ca7ywudu" path="res://Scenes/UI/IngameUi.tscn" id="2_wo5kr"]
+[ext_resource type="PackedScene" uid="uid://baa0or5n71rme" path="res://Scenes/UI/Menu.tscn" id="3_qwacd"]
+
+[node name="Game" type="Node" node_paths=PackedStringArray("menu", "ingameUI")]
+script = ExtResource("1_o262b")
+menu = NodePath("Menu")
+ingameUI = NodePath("IngameUI")
+energyThresholds = Array[float]([100.0, 250.0, 400.0, 800.0, 1200.0])
+
+[node name="IngameUI" parent="." node_paths=PackedStringArray("regrowImages") instance=ExtResource("2_wo5kr")]
+regrowImages = [null, null, null, null, null]
+
+[node name="Menu" parent="." instance=ExtResource("3_qwacd")]

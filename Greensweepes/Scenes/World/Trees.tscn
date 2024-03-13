@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://b334b5gfk6cod"]
+
+[ext_resource type="Script" path="res://Scenes/World/Trees.cs" id="1_uhral"]
+[ext_resource type="PackedScene" uid="uid://cjy7bgtgoa80p" path="res://Scenes/World/Tree.tscn" id="2_eq5ml"]
+
+[node name="Trees" type="Node3D" node_paths=PackedStringArray("trees")]
+script = ExtResource("1_uhral")
+trees = [NodePath("TreeTopLeft"), NodePath("TreeTopCenter"), NodePath("TreeTopRight"), NodePath("TreeMidLeft"), NodePath("TreeMidRight"), NodePath("TreeBottomLeft"), NodePath("TreeBottomCenter"), NodePath("TreeBottomRight")]
+
+[node name="TreeTopLeft" parent="." instance=ExtResource("2_eq5ml")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, -0.2)
+visible = false
+idX = -1
+idY = -1
+
+[node name="TreeTopCenter" parent="." instance=ExtResource("2_eq5ml")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.3)
+visible = false
+idY = -1
+
+[node name="TreeTopRight" parent="." instance=ExtResource("2_eq5ml")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, -0.2)
+visible = false
+idX = 1
+idY = -1
+
+[node name="TreeMidLeft" parent="." instance=ExtResource("2_eq5ml")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0)
+visible = false
+idX = -1
+
+[node name="TreeMidCenter" parent="." instance=ExtResource("2_eq5ml")]
+visible = false
+
+[node name="TreeMidRight" parent="." instance=ExtResource("2_eq5ml")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
+visible = false
+idX = 1
+
+[node name="TreeBottomLeft" parent="." instance=ExtResource("2_eq5ml")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0.2)
+visible = false
+idX = -1
+idY = 1
+
+[node name="TreeBottomCenter" parent="." instance=ExtResource("2_eq5ml")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3)
+visible = false
+idY = 1
+
+[node name="TreeBottomRight" parent="." instance=ExtResource("2_eq5ml")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0.2)
+visible = false
+idX = 1
+idY = 1

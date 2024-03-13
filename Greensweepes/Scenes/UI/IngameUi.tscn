@@ -1,0 +1,93 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsov3ca7ywudu"]
+
+[ext_resource type="Script" path="res://Scenes/IngameUI.cs" id="1_l6q3o"]
+[ext_resource type="Texture2D" uid="uid://bdauorhb7m2xk" path="res://Assets/Textures/Highlight.png" id="2_0x56k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a13m5"]
+bg_color = Color(0.0823529, 0.113725, 0.156863, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bbmqa"]
+bg_color = Color(0.27451, 0.509804, 0.196078, 1)
+
+[node name="IngameUI" type="Control" node_paths=PackedStringArray("regrowBar", "regrowImages")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_l6q3o")
+regrowBar = NodePath("RegrowBar")
+regrowImages = [NodePath("HBoxContainer/Regrow1"), NodePath("HBoxContainer/Regrow2"), NodePath("HBoxContainer/Regrow3"), NodePath("HBoxContainer/Regrow4"), NodePath("HBoxContainer/Regrow5")]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -32.0
+offset_right = 16.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Regrow1" type="TextureRect" parent="HBoxContainer"]
+visible = false
+modulate = Color(0.27451, 0.509804, 0.196078, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_0x56k")
+expand_mode = 1
+
+[node name="Regrow2" type="TextureRect" parent="HBoxContainer"]
+visible = false
+modulate = Color(0.27451, 0.509804, 0.196078, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_0x56k")
+expand_mode = 1
+
+[node name="Regrow3" type="TextureRect" parent="HBoxContainer"]
+visible = false
+modulate = Color(0.27451, 0.509804, 0.196078, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_0x56k")
+expand_mode = 1
+
+[node name="Regrow4" type="TextureRect" parent="HBoxContainer"]
+visible = false
+modulate = Color(0.27451, 0.509804, 0.196078, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_0x56k")
+expand_mode = 1
+
+[node name="Regrow5" type="TextureRect" parent="HBoxContainer"]
+visible = false
+modulate = Color(0.27451, 0.509804, 0.196078, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_0x56k")
+expand_mode = 1
+
+[node name="RegrowBar" type="ProgressBar" parent="."]
+custom_minimum_size = Vector2(512, 8)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -256.0
+offset_top = -8.0
+offset_right = 256.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_a13m5")
+theme_override_styles/fill = SubResource("StyleBoxFlat_bbmqa")
+max_value = 1.0
+show_percentage = false
