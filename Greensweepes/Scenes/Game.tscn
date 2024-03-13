@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bn1mtqo1m2ddn"]
+[gd_scene load_steps=13 format=3 uid="uid://bn1mtqo1m2ddn"]
 
 [ext_resource type="Script" path="res://Scenes/Game.cs" id="1_o262b"]
 [ext_resource type="Script" path="res://Scenes/UI/GameUI.cs" id="2_d8mkr"]
@@ -7,6 +7,11 @@
 [ext_resource type="Script" path="res://Scenes/Audio/GameAudio.cs" id="5_njei0"]
 [ext_resource type="AudioStream" uid="uid://bcqysc24n5pw6" path="res://Assets/Audio/Atmo/AtmoBleak.ogg" id="6_gjlkd"]
 [ext_resource type="AudioStream" uid="uid://b5w6of5unbqlc" path="res://Assets/Audio/Atmo/AtmoLively.ogg" id="7_4vcnr"]
+[ext_resource type="PackedScene" uid="uid://ch8ib2lp8vskt" path="res://Scenes/Audio/RandomStreamPlayer.tscn" id="8_xn0hx"]
+[ext_resource type="AudioStream" uid="uid://7m641xtw31hn" path="res://Assets/Audio/Sounds/cut.wav" id="9_135tw"]
+[ext_resource type="AudioStream" uid="uid://ku8gvhcbfgrj" path="res://Assets/Audio/Sounds/reveal.wav" id="10_umea4"]
+[ext_resource type="AudioStream" uid="uid://boigqaumbn27" path="res://Assets/Audio/Sounds/mark.wav" id="11_rcofj"]
+[ext_resource type="AudioStream" uid="uid://2fq6b4tdipqf" path="res://Assets/Audio/Sounds/grow.wav" id="12_i8wj0"]
 
 [node name="Game" type="Node" node_paths=PackedStringArray("ui", "audio")]
 script = ExtResource("1_o262b")
@@ -23,12 +28,16 @@ ingameUI = NodePath("IngameUI")
 
 [node name="Menu" parent="GameUI" instance=ExtResource("3_qwacd")]
 
-[node name="GameAudio" type="Node" parent="." node_paths=PackedStringArray("musicPlayer", "atmoPlayerBleak", "atmoPlayerLively")]
+[node name="GameAudio" type="Node" parent="." node_paths=PackedStringArray("musicPlayer", "atmoPlayerBleak", "atmoPlayerLively", "cutPlayer", "revealPlayer", "markPlayer", "regrowPlayer")]
 process_mode = 3
 script = ExtResource("5_njei0")
 musicPlayer = NodePath("MusicPlayer")
 atmoPlayerBleak = NodePath("AtmoPlayerBleak")
 atmoPlayerLively = NodePath("AtmoPlayerLively")
+cutPlayer = NodePath("Sounds/CutPlayer")
+revealPlayer = NodePath("Sounds/RevealPlayer")
+markPlayer = NodePath("Sounds/MarkPlayer")
+regrowPlayer = NodePath("Sounds/RegrowPlayer")
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="GameAudio"]
 autoplay = true
@@ -40,3 +49,24 @@ autoplay = true
 [node name="AtmoPlayerLively" type="AudioStreamPlayer" parent="GameAudio"]
 stream = ExtResource("7_4vcnr")
 autoplay = true
+
+[node name="Sounds" type="Node" parent="GameAudio"]
+
+[node name="CutPlayer" parent="GameAudio/Sounds" instance=ExtResource("8_xn0hx")]
+streams = Array[AudioStream]([ExtResource("9_135tw")])
+minVolume = -8.0
+maxVolume = -4.0
+
+[node name="RevealPlayer" parent="GameAudio/Sounds" instance=ExtResource("8_xn0hx")]
+streams = Array[AudioStream]([ExtResource("10_umea4")])
+minVolume = -4.0
+minPitch = 0.8
+maxPitch = 1.2
+
+[node name="MarkPlayer" parent="GameAudio/Sounds" instance=ExtResource("8_xn0hx")]
+streams = Array[AudioStream]([ExtResource("11_rcofj")])
+minVolume = -2.0
+minPitch = 0.8
+
+[node name="RegrowPlayer" parent="GameAudio/Sounds" instance=ExtResource("8_xn0hx")]
+streams = Array[AudioStream]([ExtResource("12_i8wj0")])

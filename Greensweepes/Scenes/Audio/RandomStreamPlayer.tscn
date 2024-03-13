@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ch8ib2lp8vskt"]
+
+[ext_resource type="Script" path="res://Scenes/Audio/RandomStreamPlayer.cs" id="1_0a3u7"]
+
+[node name="RandomStreamPlayer" type="AudioStreamPlayer"]
+script = ExtResource("1_0a3u7")

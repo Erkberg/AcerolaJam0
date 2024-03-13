@@ -133,10 +133,13 @@ public partial class Cell : Area3D
             {
                 neighbor.UpdateCuts();
             }
+
+            Game.inst.audio.PlaySound(hasCut ? GameAudio.Sound.Cut : GameAudio.Sound.Regrow);
         }
         else if (!IsMarked())
         {
             Reveal();
+            Game.inst.audio.PlaySound(hasCut ? GameAudio.Sound.Cut : GameAudio.Sound.Reveal);
         }
     }
 
@@ -144,6 +147,7 @@ public partial class Cell : Area3D
     {
         if (!IsRevealed())
         {
+            Game.inst.audio.PlaySound(GameAudio.Sound.Mark);
             ChangeState(IsMarked() ? State.Highlighted : State.Marked);
             cells.OnMarkerChanged(IsMarked());
         }
