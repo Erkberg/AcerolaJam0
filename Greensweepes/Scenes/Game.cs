@@ -12,6 +12,8 @@ public partial class Game : Node
 
     private float energy;
     private int regrows;
+    private float progress;
+    private float energyMultiplier;
 
     public override void _EnterTree()
     {
@@ -20,6 +22,9 @@ public partial class Game : Node
 
     public void OnProgressChanged(float percent)
     {
+        progress = percent;
+        energyMultiplier = 1.01f - Mathf.Sqrt(progress);
+        //GD.Print(energyMultiplier);
         audio.OnCompletionChanged(percent);
     }
 
@@ -28,7 +33,8 @@ public partial class Game : Node
         if (regrows == energyThresholds.Count)
             return;
 
-        energy += amount;
+
+        energy += amount * energyMultiplier;
         float threshold = energyThresholds[regrows];
         ui.ingameUI.SetRegrowProgress(energy / threshold);
         if (energy > threshold && regrows < energyThresholds.Count)

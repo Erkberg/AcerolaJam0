@@ -282,7 +282,7 @@ public partial class Cell : Area3D
 
     private void RandomizeTimer()
     {
-        energyTimer.WaitTime = GD.RandRange(8f, 16f);
+        energyTimer.WaitTime = GD.RandRange(12f, 16f);
         if (trees.cutAmount > 0)
         {
             energyTimer.WaitTime *= trees.cutAmount;
