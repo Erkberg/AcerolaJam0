@@ -22,7 +22,16 @@ public partial class Tree : Node3D
 
     public void SetCut(bool cut)
     {
+        bool scaleUp = isCut && !cut;
+
         isCut = cut;
         crown.Visible = !cut;
+
+        if (scaleUp)
+        {
+            crown.Scale = Vector3.One * 0.01f;
+            Tween tween = CreateTween();
+            tween.TweenProperty(crown, "scale", Vector3.One, 1f);
+        }
     }
 }

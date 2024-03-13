@@ -9,7 +9,7 @@
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xjl2q"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_bottom_color = Color(0.145098, 0.227451, 0.368627, 1)
+ground_bottom_color = Color(0.0352941, 0.0392157, 0.0784314, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
 [sub_resource type="Sky" id="Sky_yhaiq"]
@@ -183,7 +183,7 @@ autoplay = "Cookie"
 script = ExtResource("1_pq0jy")
 borderOffsetX = 32
 borderOffsetY = 18
-minCutChance = 0.2
+minCutChance = 0.15
 maxCutChance = 0.6
 minCutChanceUntil = 4
 maxCutChanceFrom = 16
