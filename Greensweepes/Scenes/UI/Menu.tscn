@@ -7,7 +7,7 @@
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_rmk46"]
 
-[node name="Menu" type="Control" node_paths=PackedStringArray("showNumbersCheckbox", "playButton")]
+[node name="Menu" type="Control" node_paths=PackedStringArray("showNumbersCheckbox", "playButton", "quitButton")]
 process_mode = 3
 visibility_layer = 2
 z_index = 2
@@ -21,6 +21,7 @@ mouse_filter = 1
 script = ExtResource("1_qod3u")
 showNumbersCheckbox = NodePath("MarginContainer/VBoxContainer/ShowNumbersCheckbox")
 playButton = NodePath("MarginContainer/VBoxContainer/PlayButton")
+quitButton = NodePath("MarginContainer/VBoxContainer/QuitButton")
 
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color(0.12549, 0.180392, 0.215686, 0.878431)
@@ -136,3 +137,15 @@ text = "🔳 Click cells to reveal them (start with the blinking one to be safe)
 🪓 Be careful though: Trying to grow trees on a wrongly marked cell leads to it getting cut down!
 🖱️ You can also scroll by pointing at screen borders, zoom via mouse wheel and open this screen with Esc"
 horizontal_alignment = 1
+
+[node name="QuitButton" type="Button" parent="MarginContainer/VBoxContainer"]
+visibility_layer = 2
+custom_minimum_size = Vector2(160, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.921569, 0.929412, 0.913725, 1)
+theme_override_colors/font_outline_color = Color(0.0352941, 0.0392157, 0.0784314, 1)
+theme_override_fonts/font = ExtResource("3_ohesh")
+theme_override_font_sizes/font_size = 32
+text = "Quit
+"

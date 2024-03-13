@@ -7,11 +7,13 @@ public partial class Menu : Control
 
     [Export] private CheckBox showNumbersCheckbox;
     [Export] private Button playButton;
+    [Export] private Button quitButton;
 
     public override void _Ready()
     {
         showNumbersCheckbox.Toggled += OnShowNumbersToggled;
         playButton.Pressed += Close;
+        quitButton.Pressed += () => GetTree().Quit();
 
         Open();
     }
