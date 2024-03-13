@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://baa0or5n71rme"]
+[gd_scene load_steps=6 format=3 uid="uid://baa0or5n71rme"]
 
 [ext_resource type="Script" path="res://Scenes/UI/Menu.cs" id="1_qod3u"]
+[ext_resource type="Texture2D" uid="uid://bdu6r22lwrvgk" path="res://Assets/Textures/Icon.png" id="2_07j2c"]
 [ext_resource type="FontFile" uid="uid://cpw8ey86aj3r0" path="res://Assets/Fonts/YoungSerif/YoungSerif-Regular.ttf" id="2_et6ov"]
 [ext_resource type="FontFile" uid="uid://chbb50frpwxod" path="res://Assets/Fonts/LibreBaskerville/LibreBaskerville-Regular.ttf" id="3_ohesh"]
 
@@ -18,8 +19,8 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_qod3u")
-showNumbersCheckbox = NodePath("MarginContainer/HBoxContainer/ShowNumbersCheckbox")
-playButton = NodePath("MarginContainer/HBoxContainer/PlayButton")
+showNumbersCheckbox = NodePath("MarginContainer/VBoxContainer/ShowNumbersCheckbox")
+playButton = NodePath("MarginContainer/VBoxContainer/PlayButton")
 
 [node name="Background" type="TextureRect" parent="."]
 modulate = Color(0.12549, 0.180392, 0.215686, 0.878431)
@@ -41,13 +42,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 visibility_layer = 2
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/separation = 16
 
-[node name="TitleLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 16
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_07j2c")
+expand_mode = 2
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 visibility_layer = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.921569, 0.929412, 0.913725, 1)
@@ -58,7 +70,13 @@ theme_override_font_sizes/font_size = 100
 text = "Greensweepes"
 horizontal_alignment = 1
 
-[node name="SubTitleLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_07j2c")
+expand_mode = 2
+
+[node name="SubTitleLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 visibility_layer = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.921569, 0.929412, 0.913725, 1)
@@ -70,7 +88,7 @@ text = "A game by Erkberg
 Created for Acerola Jam 0 (Theme: Aberration)"
 horizontal_alignment = 1
 
-[node name="PlayButton" type="Button" parent="MarginContainer/HBoxContainer"]
+[node name="PlayButton" type="Button" parent="MarginContainer/VBoxContainer"]
 visibility_layer = 2
 custom_minimum_size = Vector2(320, 80)
 layout_mode = 2
@@ -81,7 +99,7 @@ theme_override_fonts/font = ExtResource("3_ohesh")
 theme_override_font_sizes/font_size = 64
 text = "Play"
 
-[node name="ShowNumbersCheckbox" type="CheckBox" parent="MarginContainer/HBoxContainer"]
+[node name="ShowNumbersCheckbox" type="CheckBox" parent="MarginContainer/VBoxContainer"]
 visibility_layer = 2
 layout_mode = 2
 size_flags_horizontal = 4
@@ -91,7 +109,7 @@ theme_override_fonts/font = ExtResource("3_ohesh")
 button_pressed = true
 text = "Show numbers (off = more immersion but harder)"
 
-[node name="TutorialHeaderLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="TutorialHeaderLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 visibility_layer = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.921569, 0.929412, 0.913725, 1)
@@ -102,7 +120,7 @@ theme_override_font_sizes/font_size = 28
 text = "How to play"
 horizontal_alignment = 1
 
-[node name="TutorialLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+[node name="TutorialLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 visibility_layer = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.921569, 0.929412, 0.913725, 1)
@@ -110,11 +128,11 @@ theme_override_colors/font_outline_color = Color(0.0352941, 0.0392157, 0.0784314
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("3_ohesh")
 theme_override_font_sizes/font_size = 20
-text = "Click cells to reveal them (start with the blinking one to be safe)
-Numbers / Stumps show how many neighbors are cut down and shouldn't be clicked
-Mark those baddies with a right click
-So far, so Minesweeper, but: Trees accumulate energy over time
-That energy can be used to grow trees on marked or cut down cells
-Be careful though: Trying to grow trees on a wrongly marked cell leads to it getting cut down!
-You can also scroll by pointing at screen borders, zoom via mouse wheel and open this screen with Esc"
+text = "🔳 Click cells to reveal them (start with the blinking one to be safe)
+1/2/3...>🪓🌳 Numbers / Stumps show how many neighbors are cut down and shouldn't be clicked
+🟦 Mark those baddies with a right click
+💚 So far, so Minesweeper, but: Trees accumulate energy over time
+🌳 That energy can be used to grow trees on marked or cut down cells
+🪓 Be careful though: Trying to grow trees on a wrongly marked cell leads to it getting cut down!
+🖱️ You can also scroll by pointing at screen borders, zoom via mouse wheel and open this screen with Esc"
 horizontal_alignment = 1
