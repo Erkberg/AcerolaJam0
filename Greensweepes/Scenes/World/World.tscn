@@ -1,10 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://h4s4wn86uevy"]
+[gd_scene load_steps=15 format=3 uid="uid://h4s4wn86uevy"]
 
 [ext_resource type="Script" path="res://Scenes/World/Cells.cs" id="1_pq0jy"]
 [ext_resource type="PackedScene" uid="uid://deog8ii522kam" path="res://Scenes/World/Cell.tscn" id="2_agv8a"]
 [ext_resource type="Script" path="res://Scenes/World/MainCam.cs" id="3_b8awm"]
 [ext_resource type="Script" path="res://Scenes/World/LevelCreator.cs" id="4_4dhgb"]
-[ext_resource type="Material" uid="uid://waeth6md7uaw" path="res://Assets/Materials/GreenMat.tres" id="6_gjopr"]
 [ext_resource type="PackedScene" uid="uid://bn1mtqo1m2ddn" path="res://Scenes/Game.tscn" id="11_sk82b"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xjl2q"]
@@ -19,7 +18,16 @@ sky_material = SubResource("ProceduralSkyMaterial_xjl2q")
 background_mode = 2
 sky = SubResource("Sky_yhaiq")
 tonemap_mode = 2
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
 glow_enabled = true
+glow_intensity = 1.0
+volumetric_fog_density = 0.02
+volumetric_fog_albedo = Color(0.643137, 0.866667, 0.858824, 1)
+volumetric_fog_emission = Color(0.643137, 0.866667, 0.858824, 1)
+volumetric_fog_length = 4.0
+adjustment_enabled = true
 
 [sub_resource type="Gradient" id="Gradient_wf2u6"]
 offsets = PackedFloat32Array(0.589226, 0.892256)
@@ -142,9 +150,6 @@ _data = {
 "RESET": SubResource("Animation_0sss1")
 }
 
-[sub_resource type="BoxMesh" id="BoxMesh_pdj2a"]
-size = Vector3(64, 1, 36)
-
 [node name="World" type="Node3D"]
 
 [node name="Game" parent="." instance=ExtResource("11_sk82b")]
@@ -153,8 +158,9 @@ size = Vector3(64, 1, 36)
 environment = SubResource("Environment_0rrv0")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 8, 0)
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433012, 0, 8, 0)
 shadow_enabled = true
+shadow_opacity = 0.8
 
 [node name="CookieLight" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 24, 0)
@@ -7094,6 +7100,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, 17)
 [node name="MainCam" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8, 0)
 cull_mask = 1
+far = 400.0
 script = ExtResource("3_b8awm")
 minY = 4.0
 maxY = 16.0
@@ -7132,7 +7139,4 @@ render_target_update_mode = 4
 [node name="NumbersCam" type="Camera3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8, 0)
 cull_mask = 2
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = ExtResource("6_gjopr")
-mesh = SubResource("BoxMesh_pdj2a")
+far = 400.0
