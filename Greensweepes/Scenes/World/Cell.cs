@@ -79,7 +79,7 @@ public partial class Cell : Area3D
         energyTimer.Timeout += OnEnergyTimer;
         RandomizeTimer();
         energyTimer.Start();
-        Game.inst.menu.showNumbersToggled += OnNumberDisplayChanged;
+        Game.inst.ui.menu.showNumbersToggled += OnNumberDisplayChanged;
     }
 
     public void SetNeighbors(Array<Cell> neighbors)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bsov3ca7ywudu"]
 
-[ext_resource type="Script" path="res://Scenes/IngameUI.cs" id="1_l6q3o"]
+[ext_resource type="Script" path="res://Scenes/UI/IngameUI.cs" id="1_l6q3o"]
 [ext_resource type="Texture2D" uid="uid://bdauorhb7m2xk" path="res://Assets/Textures/Highlight.png" id="2_0x56k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a13m5"]

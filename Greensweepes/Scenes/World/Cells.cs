@@ -104,7 +104,7 @@ public partial class Cells : Node3D
 
     public void OnCellRevealed(Cell cell)
     {
-
+        Game.inst.OnProgressChanged(GetProgressPercent());
     }
 
     public void OnMarkerChanged(bool markerAdded)
@@ -142,5 +142,19 @@ public partial class Cells : Node3D
 
         UpdateAllCuts();
         //GD.Print($"cut clicked! {cell.idX}_{cell.idY}");
+    }
+
+    private float GetProgressPercent()
+    {
+        float forests = 0f;
+        foreach (Cell cell in cells)
+        {
+            if (cell.IsForest())
+            {
+                forests++;
+            }
+        }
+
+        return forests / cells.Count;
     }
 }

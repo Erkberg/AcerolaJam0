@@ -1,16 +1,42 @@
-[gd_scene load_steps=4 format=3 uid="uid://bn1mtqo1m2ddn"]
+[gd_scene load_steps=8 format=3 uid="uid://bn1mtqo1m2ddn"]
 
 [ext_resource type="Script" path="res://Scenes/Game.cs" id="1_o262b"]
+[ext_resource type="Script" path="res://Scenes/UI/GameUI.cs" id="2_d8mkr"]
 [ext_resource type="PackedScene" uid="uid://bsov3ca7ywudu" path="res://Scenes/UI/IngameUi.tscn" id="2_wo5kr"]
 [ext_resource type="PackedScene" uid="uid://baa0or5n71rme" path="res://Scenes/UI/Menu.tscn" id="3_qwacd"]
+[ext_resource type="Script" path="res://Scenes/Audio/GameAudio.cs" id="5_njei0"]
+[ext_resource type="AudioStream" uid="uid://bcqysc24n5pw6" path="res://Assets/Audio/Atmo/AtmoBleak.ogg" id="6_gjlkd"]
+[ext_resource type="AudioStream" uid="uid://b5w6of5unbqlc" path="res://Assets/Audio/Atmo/AtmoLively.ogg" id="7_4vcnr"]
 
-[node name="Game" type="Node" node_paths=PackedStringArray("menu", "ingameUI")]
+[node name="Game" type="Node" node_paths=PackedStringArray("ui", "audio")]
 script = ExtResource("1_o262b")
-menu = NodePath("Menu")
-ingameUI = NodePath("IngameUI")
+ui = NodePath("GameUI")
+audio = NodePath("GameAudio")
 energyThresholds = Array[float]([100.0, 250.0, 400.0, 800.0, 1200.0])
 
-[node name="IngameUI" parent="." node_paths=PackedStringArray("regrowImages") instance=ExtResource("2_wo5kr")]
-regrowImages = [null, null, null, null, null]
+[node name="GameUI" type="Node" parent="." node_paths=PackedStringArray("menu", "ingameUI")]
+script = ExtResource("2_d8mkr")
+menu = NodePath("Menu")
+ingameUI = NodePath("IngameUI")
 
-[node name="Menu" parent="." instance=ExtResource("3_qwacd")]
+[node name="IngameUI" parent="GameUI" instance=ExtResource("2_wo5kr")]
+
+[node name="Menu" parent="GameUI" instance=ExtResource("3_qwacd")]
+
+[node name="GameAudio" type="Node" parent="." node_paths=PackedStringArray("musicPlayer", "atmoPlayerBleak", "atmoPlayerLively")]
+process_mode = 3
+script = ExtResource("5_njei0")
+musicPlayer = NodePath("MusicPlayer")
+atmoPlayerBleak = NodePath("AtmoPlayerBleak")
+atmoPlayerLively = NodePath("AtmoPlayerLively")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="GameAudio"]
+autoplay = true
+
+[node name="AtmoPlayerBleak" type="AudioStreamPlayer" parent="GameAudio"]
+stream = ExtResource("6_gjlkd")
+autoplay = true
+
+[node name="AtmoPlayerLively" type="AudioStreamPlayer" parent="GameAudio"]
+stream = ExtResource("7_4vcnr")
+autoplay = true

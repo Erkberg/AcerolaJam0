@@ -6,8 +6,8 @@ public partial class Game : Node
 {
     public static Game inst;
 
-    [Export] public Menu menu;
-    [Export] public IngameUI ingameUI;
+    [Export] public GameUI ui;
+    [Export] public GameAudio audio;
     [Export] private Array<float> energyThresholds;
 
     private float energy;
@@ -18,6 +18,11 @@ public partial class Game : Node
         inst = this;
     }
 
+    public void OnProgressChanged(float percent)
+    {
+        audio.OnCompletionChanged(percent);
+    }
+
     public void AddEnergy(float amount)
     {
         if (regrows == energyThresholds.Count)
@@ -25,12 +30,12 @@ public partial class Game : Node
 
         energy += amount;
         float threshold = energyThresholds[regrows];
-        ingameUI.SetRegrowProgress(energy / threshold);
+        ui.ingameUI.SetRegrowProgress(energy / threshold);
         if (energy > threshold && regrows < energyThresholds.Count)
         {
             energy -= threshold;
             regrows++;
-            ingameUI.SetRegrowsAmount(regrows);
+            ui.ingameUI.SetRegrowsAmount(regrows);
         }
     }
 
@@ -57,6 +62,6 @@ public partial class Game : Node
     public void OnRegrowUsed(int amount = 1)
     {
         regrows -= amount;
-        ingameUI.SetRegrowsAmount(regrows);
+        ui.ingameUI.SetRegrowsAmount(regrows);
     }
 }
