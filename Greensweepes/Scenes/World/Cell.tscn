@@ -56,6 +56,8 @@ _data = {
 }
 
 [node name="Cell" type="Area3D" node_paths=PackedStringArray("numberText", "groundMesh", "trees", "animPlayer", "energyTimer", "regrowSprite", "neighbors")]
+monitoring = false
+monitorable = false
 script = ExtResource("1_krkwj")
 numberText = NodePath("Label3D")
 groundMesh = NodePath("Ground")

@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://h4s4wn86uevy"]
+[gd_scene load_steps=17 format=3 uid="uid://h4s4wn86uevy"]
 
 [ext_resource type="Script" path="res://Scenes/World/Cells.cs" id="1_pq0jy"]
 [ext_resource type="PackedScene" uid="uid://deog8ii522kam" path="res://Scenes/World/Cell.tscn" id="2_agv8a"]
 [ext_resource type="Script" path="res://Scenes/World/MainCam.cs" id="3_b8awm"]
 [ext_resource type="Script" path="res://Scenes/World/LevelCreator.cs" id="4_4dhgb"]
+[ext_resource type="Material" uid="uid://waeth6md7uaw" path="res://Assets/Materials/GreenMat.tres" id="6_gjopr"]
 [ext_resource type="PackedScene" uid="uid://bn1mtqo1m2ddn" path="res://Scenes/Game.tscn" id="11_sk82b"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xjl2q"]
@@ -20,6 +21,130 @@ sky = SubResource("Sky_yhaiq")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="Gradient" id="Gradient_wf2u6"]
+offsets = PackedFloat32Array(0.589226, 0.892256)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wmufw"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ulml5"]
+seamless = true
+color_ramp = SubResource("Gradient_wf2u6")
+noise = SubResource("FastNoiseLite_wmufw")
+
+[sub_resource type="Animation" id="Animation_fhnyk"]
+resource_name = "Cookie"
+length = 60.0
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 30, 60),
+"transitions": PackedFloat32Array(0.392292, 2.07053, 1),
+"update": 0,
+"values": [0.0, 128.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:light_projector:noise:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(16, 32, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:light_projector:noise:frequency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 60),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.01, 0.0133]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:light_projector:color_ramp")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 15, 30, 45, 60),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [SubResource("Gradient_wf2u6"), SubResource("Gradient_wf2u6"), SubResource("Gradient_wf2u6"), SubResource("Gradient_wf2u6"), SubResource("Gradient_wf2u6")]
+}
+
+[sub_resource type="Animation" id="Animation_0sss1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [64.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:light_projector:noise:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:light_projector:noise:frequency")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.01]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:light_projector:color_ramp")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("Gradient_wf2u6")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kfoh3"]
+_data = {
+"Cookie": SubResource("Animation_fhnyk"),
+"RESET": SubResource("Animation_0sss1")
+}
+
+[sub_resource type="BoxMesh" id="BoxMesh_pdj2a"]
+size = Vector3(64, 1, 36)
+
 [node name="World" type="Node3D"]
 
 [node name="Game" parent="." instance=ExtResource("11_sk82b")]
@@ -28,8 +153,22 @@ glow_enabled = true
 environment = SubResource("Environment_0rrv0")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 8, 0)
 shadow_enabled = true
+
+[node name="CookieLight" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 24, 0)
+light_energy = 64.0
+light_projector = SubResource("NoiseTexture2D_ulml5")
+shadow_enabled = true
+spot_range = 64.0
+spot_angle = 60.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CookieLight"]
+libraries = {
+"": SubResource("AnimationLibrary_kfoh3")
+}
+autoplay = "Cookie"
 
 [node name="Cells" type="Node3D" parent="." node_paths=PackedStringArray("levelCreator")]
 script = ExtResource("1_pq0jy")
@@ -6993,3 +7132,7 @@ render_target_update_mode = 4
 [node name="NumbersCam" type="Camera3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8, 0)
 cull_mask = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("6_gjopr")
+mesh = SubResource("BoxMesh_pdj2a")
