@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://h4s4wn86uevy"]
+[gd_scene load_steps=16 format=3 uid="uid://h4s4wn86uevy"]
 
+[ext_resource type="Script" path="res://Scenes/World/World.cs" id="1_o2hnu"]
 [ext_resource type="Script" path="res://Scenes/World/Cells.cs" id="1_pq0jy"]
 [ext_resource type="PackedScene" uid="uid://deog8ii522kam" path="res://Scenes/World/Cell.tscn" id="2_agv8a"]
 [ext_resource type="Script" path="res://Scenes/World/MainCam.cs" id="3_b8awm"]
@@ -150,7 +151,9 @@ _data = {
 "RESET": SubResource("Animation_0sss1")
 }
 
-[node name="World" type="Node3D"]
+[node name="World" type="Node3D" node_paths=PackedStringArray("mainCam")]
+script = ExtResource("1_o2hnu")
+mainCam = NodePath("CamHolder/MainCam")
 
 [node name="Game" parent="." instance=ExtResource("11_sk82b")]
 
@@ -7097,18 +7100,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, 16)
 [node name="@Area3D@60207" parent="Cells" instance=ExtResource("2_agv8a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, 17)
 
-[node name="MainCam" type="Camera3D" parent="."]
+[node name="CamHolder" type="Node3D" parent="."]
+
+[node name="MainCam" type="Camera3D" parent="CamHolder" node_paths=PackedStringArray("holder")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 8, 0)
 cull_mask = 1
 far = 400.0
 script = ExtResource("3_b8awm")
+holder = NodePath("..")
 minY = 4.0
 maxY = 16.0
 maxX = 28.0
 maxZ = 16.0
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="MainCam"]
-remote_path = NodePath("../../SubViewportContainer/SubViewport/NumbersCam")
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="CamHolder/MainCam"]
+remote_path = NodePath("../../../SubViewportContainer/SubViewport/NumbersCam")
 
 [node name="PremiseLabel" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)

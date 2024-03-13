@@ -186,6 +186,8 @@ public partial class Cell : Area3D
 
     private void RevealCut()
     {
+        GD.Print("reveal cut");
+        World.inst.mainCam.StartShake();
         ChangeState(State.Cut);
         cells.OnCutClicked(this);
         trees.SetCutAmount(8);
