@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://h4s4wn86uevy"]
+[gd_scene load_steps=17 format=3 uid="uid://h4s4wn86uevy"]
 
 [ext_resource type="Script" path="res://Scenes/World/World.cs" id="1_o2hnu"]
 [ext_resource type="Script" path="res://Scenes/World/Cells.cs" id="1_pq0jy"]
+[ext_resource type="PackedScene" uid="uid://d3mdkoxue441" path="res://Scenes/World/Animal.tscn" id="2_8sitf"]
 [ext_resource type="PackedScene" uid="uid://deog8ii522kam" path="res://Scenes/World/Cell.tscn" id="2_agv8a"]
 [ext_resource type="Script" path="res://Scenes/World/MainCam.cs" id="3_b8awm"]
 [ext_resource type="Script" path="res://Scenes/World/LevelCreator.cs" id="4_4dhgb"]
@@ -151,9 +152,12 @@ _data = {
 "RESET": SubResource("Animation_0sss1")
 }
 
-[node name="World" type="Node3D" node_paths=PackedStringArray("mainCam")]
+[node name="World" type="Node3D" node_paths=PackedStringArray("mainCam", "cells", "animalsHolder")]
 script = ExtResource("1_o2hnu")
 mainCam = NodePath("CamHolder/MainCam")
+cells = NodePath("Cells")
+animalsHolder = NodePath("Animals")
+animalScene = ExtResource("2_8sitf")
 
 [node name="Game" parent="." instance=ExtResource("11_sk82b")]
 
@@ -7099,6 +7103,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, 16)
 
 [node name="@Area3D@60207" parent="Cells" instance=ExtResource("2_agv8a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31, 0, 17)
+
+[node name="Animals" type="Node3D" parent="."]
 
 [node name="CamHolder" type="Node3D" parent="."]
 

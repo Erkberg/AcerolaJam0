@@ -1,0 +1,113 @@
+[gd_scene load_steps=13 format=3 uid="uid://d3mdkoxue441"]
+
+[ext_resource type="Material" uid="uid://cx3p5s71mmc53" path="res://Assets/Materials/BlackMat.tres" id="1_0hyld"]
+[ext_resource type="Script" path="res://Scenes/World/Animal.cs" id="1_nuvcm"]
+[ext_resource type="Material" uid="uid://b33hf3nx260c" path="res://Assets/Materials/BrownMat.tres" id="2_rhblg"]
+[ext_resource type="Material" uid="uid://caukl0vcf47ug" path="res://Assets/Materials/PinkMat.tres" id="3_lx7cq"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_t4juy"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_od0h6"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1nh2w"]
+height = 0.033
+
+[sub_resource type="SphereMesh" id="SphereMesh_7ulqv"]
+radius = 0.133
+height = 0.25
+
+[sub_resource type="SphereMesh" id="SphereMesh_48fdw"]
+radius = 0.133
+
+[sub_resource type="Animation" id="Animation_ydbm5"]
+resource_name = "Move"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.1, 0), Vector3(0, 0.133, -0.01), Vector3(0, 0.1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_olk6r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3sce1"]
+_data = {
+"Move": SubResource("Animation_ydbm5"),
+"RESET": SubResource("Animation_olk6r")
+}
+
+[node name="Animal" type="Node3D" node_paths=PackedStringArray("idleTimer")]
+script = ExtResource("1_nuvcm")
+idleTimer = NodePath("IdleTimer")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0.1, 0)
+material_override = ExtResource("2_rhblg")
+mesh = SubResource("SphereMesh_t4juy")
+
+[node name="Eyes" type="Node3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -0.3)
+
+[node name="EyeLeft" type="MeshInstance3D" parent="Body/Eyes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 0)
+material_override = ExtResource("1_0hyld")
+mesh = SubResource("SphereMesh_od0h6")
+
+[node name="EyeRight" type="MeshInstance3D" parent="Body/Eyes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, 0)
+material_override = ExtResource("1_0hyld")
+mesh = SubResource("SphereMesh_od0h6")
+
+[node name="Ears" type="Node3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0.5, 0)
+
+[node name="EarLeft" type="MeshInstance3D" parent="Body/Ears"]
+transform = Transform3D(0.216975, 0.161227, 0.234923, -0.124183, 0.286788, 0.409576, -0.000669278, -0.94433, 0.164495, 0.3, -0.1, 0)
+material_override = ExtResource("3_lx7cq")
+mesh = SubResource("CylinderMesh_1nh2w")
+
+[node name="EarRight" type="MeshInstance3D" parent="Body/Ears"]
+transform = Transform3D(0.216975, -0.161227, -0.234923, 0.124183, 0.286788, 0.409576, 0.000669278, -0.94433, 0.164495, -0.3, -0.1, 0)
+material_override = ExtResource("3_lx7cq")
+mesh = SubResource("CylinderMesh_1nh2w")
+
+[node name="Nose" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -0.5)
+material_override = ExtResource("3_lx7cq")
+mesh = SubResource("SphereMesh_7ulqv")
+
+[node name="Tail" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, -0.1, 0.5)
+material_override = ExtResource("2_rhblg")
+mesh = SubResource("SphereMesh_48fdw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3sce1")
+}
+autoplay = "Move"
+
+[node name="IdleTimer" type="Timer" parent="."]
+one_shot = true

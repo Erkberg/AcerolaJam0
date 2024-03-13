@@ -166,6 +166,7 @@ public partial class Cell : Area3D
         {
             ChangeState(State.Forest);
             trees.SetCutAmount(neighborCuts);
+            World.inst.OnForestCellRevealed();
             if (neighborCuts > 0)
             {
                 numberText.Text = neighborCuts.ToString();

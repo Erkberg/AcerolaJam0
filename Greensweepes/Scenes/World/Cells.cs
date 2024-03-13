@@ -157,4 +157,17 @@ public partial class Cells : Node3D
 
         return forests / cells.Count;
     }
+
+    public Array<Cell> GetCellsWithState(Cell.State state)
+    {
+        Array<Cell> stateCells = new Array<Cell>();
+        foreach (Cell cell in cells)
+        {
+            if (cell.state == state)
+            {
+                stateCells.Add(cell);
+            }
+        }
+        return stateCells;
+    }
 }
