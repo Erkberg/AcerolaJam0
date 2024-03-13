@@ -19,6 +19,7 @@ config/icon="res://Assets/Textures/IconBuild.png"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode.release=3
 
 [dotnet]
 
