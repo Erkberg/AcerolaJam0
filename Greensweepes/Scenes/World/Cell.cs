@@ -104,7 +104,7 @@ public partial class Cell : Area3D
         }
     }
 
-    public override void _Input(InputEvent @event)
+    public override void _Process(double delta)
     {
         if (mouseOver)
         {

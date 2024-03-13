@@ -16,7 +16,7 @@ public partial class Menu : Control
         Open();
     }
 
-    public override void _Input(InputEvent @event)
+    public override void _Process(double delta)
     {
         if (Input.IsActionJustPressed(Inputs.Menu))
         {
