@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://deog8ii522kam"]
+[gd_scene load_steps=17 format=3 uid="uid://deog8ii522kam"]
 
 [ext_resource type="Script" path="res://Scenes/World/Cell.cs" id="1_krkwj"]
 [ext_resource type="PackedScene" uid="uid://clgk76betcsat" path="res://Scenes/Effects/EnergyParticle.tscn" id="2_etk52"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://du1di23s3qcj5" path="res://Assets/Textures/Outline1px.png" id="7_tviq2"]
 [ext_resource type="Texture2D" uid="uid://bdauorhb7m2xk" path="res://Assets/Textures/Highlight.png" id="8_8r7ip"]
 [ext_resource type="PackedScene" uid="uid://b334b5gfk6cod" path="res://Scenes/World/Trees.tscn" id="8_qfbtx"]
+[ext_resource type="Texture2D" uid="uid://bdu6r22lwrvgk" path="res://Assets/Textures/Icon.png" id="10_7e6iq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uvbl5"]
 size = Vector3(1, 0.1, 1)
@@ -100,10 +101,9 @@ modulate = Color(1, 1, 1, 0)
 texture = ExtResource("8_8r7ip")
 
 [node name="RegrowSprite" type="Sprite3D" parent="."]
-transform = Transform3D(0.39, 0, 0, 0, -1.70474e-08, 0.39, 0, -0.39, -1.70474e-08, 0, 0.055, 0)
+transform = Transform3D(0.33, 0, 0, 0, -1.44248e-08, 0.33, 0, -0.33, -1.44248e-08, 0, 0.055, 0)
 visible = false
-modulate = Color(0.145098, 0.337255, 0.180392, 1)
-texture = ExtResource("8_8r7ip")
+texture = ExtResource("10_7e6iq")
 
 [node name="Trees" parent="." instance=ExtResource("8_qfbtx")]
 
